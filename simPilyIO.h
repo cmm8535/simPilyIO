@@ -14,12 +14,24 @@
 ///This part is for an idea to speed up functions to only access files
 ///When neccessary (like setting a value that it doesn't have already)
 struct pin{
-  short num:5;
-  short val:1;
-  short dir:1;
+  FILE* dir_path;
+  FILE* val_path;
+  unsigned short num:6;
+  unsigned short val:1;
+  unsigned short dir:1;
 };
 
-typedef struct pin* pin_t;
+typedef struct pin pin_t;
+
+/**
+ *Initializes nessassary stuff
+ */
+void init();
+
+/**
+ *Un-initalizes stuff when done
+ */
+void uninit();
 
 /**
  *Initializes the given pin for use (set to 0 by default)
@@ -54,25 +66,21 @@ int removePin(short pin);
  *  -If a value that is not a 1 or 0 is given it will be treated as a 1
  *  -If the given pin is uninitialized (or invalid), nothing happens
  *  -The given pin has a direction of "in"
- *  -Program doesn't have root priveledges (can't access a needed path)
  *
  *@Param pin: GPIO number
  *@Param value: 1 to set the pin "high", 0 to set the pin "low"
  */
-void setPin(short pin, short value);
+void setPinVal(short pin, short value);
 
 /**
  *Gets the value of a given gpio pin
  *
  *ERRORS:
  *  -If the given pin is uninitialized (or invalid), -1 is returned
- *  -If the pin somehow doesn't have a value (which I think is impossible, but
- *  need this part to suppress errors), -1 is returned
- *  -Program doesn't have root privelegdes (can't access a needed path)
  *
  *@Param pin: GPIO number
  *@Return: Value of the given gpio pin (1 if "high", 0 if "low")
  */
-short getPin(short pin);
+short getPinVal(short pin);
 
 #endif //SIMPILYIO_H
