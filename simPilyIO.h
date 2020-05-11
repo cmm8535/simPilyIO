@@ -83,4 +83,14 @@ void setPinVal(short pin, short value);
  */
 short getPinVal(short pin);
 
+/**
+ *The program waits the given number of seconds then proceads
+ *
+ *NOTE: This is literally the "sleep" function. Only works for
+ *Unix currently (I think).
+ *
+ *@Param s: Number of seconds to wait
+ */
+void wait(unsigned short s);
+
 #endif //SIMPILYIO_H

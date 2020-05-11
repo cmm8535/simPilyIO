@@ -9,6 +9,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <time.h>
 #include "simPilyIO.h"
 
 #define GPIO_PATH "/sys/class/gpio"
@@ -111,4 +112,9 @@ void setPinVal(short pin, short value){
 ///Gets the value of the given gpio pin
 short getPinVal(short pin){
   return pins[pin] ? pins[pin]->val : -1;
+}
+
+///Make the program wait the given number of seconds
+void wait(unsigned short s){
+  sleep(s);
 }
